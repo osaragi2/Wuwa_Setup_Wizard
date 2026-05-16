@@ -1,101 +1,71 @@
-# Wuthering Waves Setup Wizard
+# ✨ Wuthering Waves Setup Wizard
 
-Blender addon for importing and setting up Wuthering Waves character models.
+> Blender addon giúp thiết lập nhân vật Wuthering Waves nhanh chóng và dễ dàng.
 
-## Features
+![Blender](https://img.shields.io/badge/Blender-4.2+-orange?logo=blender&logoColor=white)
+![License](https://img.shields.io/badge/License-GPL--3.0-blue)
+![Version](https://img.shields.io/badge/Version-1.0.0-green)
 
-### Shader & Material
-- Shader Selection (Wuthering Waves / Gathering Wives)
-- Quick Setup
-- Texture Pipeline
-- Seethrough Mesh
-- AMD Fix
+---
 
-### Rigging & Drivers
-- Rigify Integration
-- EyeTracker
-- Face Panel
-- Driver Setup
+## 📦 Cài đặt
 
-### Mesh Tools
-- Join Mesh
-- Outlines
-- Geometry Nodes
-- Collection Organization
-- Physical Bone Arrangement
+1. Tải file `.zip` của addon
+2. Mở Blender → `Edit` → `Preferences` → `Add-ons`
+3. Nhấn `Install from Disk...` → chọn file `.zip`
+4. Bật addon **Wuthering Waves Setup Wizard**
 
-### Visual Effects
-- Outlines Toggle
-- Two-Colored Eyes
-- Tacet Mark Animation
-- Solid Mode
+> [!NOTE]
+> Yêu cầu Blender **4.2** trở lên.
 
-### Camera & Misc
-- Smart Camera
-- Planet Shadow Catcher
+---
 
-## File Structure
+## 🚀 Bắt đầu nhanh
 
-```
-wuwa_setup_wizard/
-├── __init__.py
-├── addon_info.py
-├── blender_manifest.toml
-│
-├── core/
-│   ├── object_manager.py
-│   ├── driver_manager.py
-│   ├── helper_object_manager.py
-│   ├── collection_manager.py
-│   ├── scene_manager.py
-│   ├── viewport_manager.py
-│   ├── shape_key_manager.py
-│   ├── camera_manager.py
-│   └── utils.py
-│
-├── operators/
-│   ├── quick_setup.py
-│   ├── shader_ops.py
-│   ├── setup_ops.py
-│   ├── effect_ops.py
-│   ├── camera_ops.py
-│   ├── mesh_ops.py
-│   ├── collection_ops.py
-│   ├── misc_ops.py
-│   ├── texture_ops.py
-│   ├── import_export.py
-│   └── amd_fix_ops.py
-│
-├── texture/
-│   ├── texture_processor.py
-│   └── texture_interpolation.py
-│
-├── material/
-│   ├── material_manager.py
-│   └── shader_importer.py
-│
-├── geometry/
-│   ├── geometry_manager.py
-│   ├── effect_manager.py
-│   ├── mesh_manager.py
-│   ├── seethrough_manager.py
-│   └── vertex_processor.py
-│
-├── rigging/
-│   ├── rigify_operator.py
-│   ├── face_panel_creator.py
-│   ├── face_panel_importer.py
-│   └── bone_manager.py
-│
-├── ui/
-│   ├── panel.py
-│   ├── properties.py
-│   └── ui_cache.py
-│
-└── shader/
-    └── Gathering Wives.blend
-```
+### Bước 1 — Import Model
+Kéo thả file `.fbx` vào Blender hoặc dùng `File` → `Import`.
 
-## Credits
+### Bước 2 — Quick Setup
+Chọn mesh nhân vật → mở panel **Wuthering Waves** ở sidebar (`N`) → nhấn **Quick Setup**.
 
-**Akatsuki** - Version 1.0
+Addon sẽ tự động:
+- 🎨 Áp dụng Shader & Material
+- 🖼️ Gán Texture
+- 📐 Thiết lập Geometry Nodes & Outlines
+
+### Bước 3 — Tùy chỉnh thêm (tuỳ chọn)
+- 🦴 **Rigify** — Tự động tạo rig chuyên nghiệp
+- 😊 **Face Panel** — Tạo bảng điều khiển biểu cảm khuôn mặt
+- 👁️ **EyeTracker** — Hệ thống điều khiển mắt
+- 🎥 **Smart Camera** — Camera tự động theo nhân vật
+
+---
+
+## 🎯 Tính năng chính
+
+| | Tính năng | Mô tả |
+|---|---|---|
+| 🎨 | **Shader & Material** | Tự động áp dụng shader, texture, seethrough mesh |
+| 🦴 | **Rigify Integration** | Tạo rig nâng cao với Rigify |
+| 😊 | **Face Panel** | Bảng điều khiển biểu cảm mặt & miệng |
+| 👁️ | **EyeTracker** | Theo dõi mắt với driver tự động |
+| 📐 | **Geometry Nodes** | Outlines & hiệu ứng hình học |
+| ✨ | **Visual Effects** | Two-Colored Eyes, Tacet Mark, Solid Mode |
+| 🎥 | **Smart Camera** | Hệ thống camera thông minh |
+| 🔧 | **AMD Fix** | Sửa lỗi hiển thị trên GPU AMD |
+
+---
+
+## 📍 Vị trí Panel
+
+Sidebar Blender (`N`) → Tab **Wuthering Waves**
+
+---
+
+## 📄 License
+
+GPL-3.0 — Xem [LICENSE](LICENSE) để biết thêm chi tiết.
+
+## 👤 Credits
+
+**Akatsuki** — Version 1.0
