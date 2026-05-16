@@ -46,58 +46,61 @@ Use the panel sections below to further enhance your character setup.
 
 ## 🎯 Features
 
-### 🎨 Shader & Material
+### 🎨 Material Pipeline
 | Feature | Description |
 |---|---|
 | **Shader Selection** | Choose between Wuthering Waves or Gathering Wives shader |
 | **Apply Shader** | One-click shader and material assignment |
 | **Import Textures** | Automatic texture detection and assignment |
-| **Global Settings** | Adjust shadow, skin color, face expression settings across all materials |
 
 ### 🖼️ Texture Pipeline
 | Feature | Description |
 |---|---|
-| **Texture Pipeline** | Cycle between Standard, Mod, Merged texture modes |
-| **Texture Form Change** | Switch texture variants on the fly |
+| **Normal / Injured / Wet** | Switch between texture status modes |
+| **Form Change** | Cycle through available texture form variants |
 
-### 🦴 Rigging & Drivers
+### 🦴 Character Rig
 | Feature | Description |
 |---|---|
 | **Rigify Armature** | One-click professional rig generation with Rigify |
 | **Create Face Panel** | Build facial expression controls with bone drivers |
 | **Import Face Panel** | Import pre-made face panel from `.blend` file |
-| **EyeTracker** | Automatic eye tracking system with pupil controls |
-| **Set Driver** | Set up shader drivers for light direction and head tracking |
+
+### ⚙️ Global Settings
+| Feature | Description |
+|---|---|
+| **Expression** | Adjust Face Blush, Face Shadow, Face Shadow Atlas |
+| **Shadow** | Control Shadow Offset, Shadow Smooth, Cast Shadows |
+| **Skin Color** | Set Skin Lit, Midtone, Shadow, Edge colors |
 
 ### 🔧 Advanced Tools
 | Feature | Description |
 |---|---|
+| **Set Driver** | Set up shader drivers for light direction and head tracking |
 | **Animation Mode** | Toggle lightweight viewport mode for smoother animation playback |
-| **Add Tacet Mark** | Add and configure Tacet Mark with UV and animation |
+| **Add Tacet Mark** | Add Tacet Mark material with UV setup |
 | **Join Mesh** | Merge character mesh parts into one object |
 | **Create Collection** | Organize objects into structured collections |
 | **Set Up Geometry Nodes** | Configure outlines and geometry node effects |
 | **Bone Arrangement** | Organize physical bones (Hair, Skirt, Cloth, Chest, Tail) into collections |
 | **Planet Shadow Catcher** | Set up shadow catcher for Planet material |
-| **Seethrough Mesh** | Configure mesh transparency for seethrough parts |
 
 ### ✨ Visual Effects
 | Feature | Description |
 |---|---|
 | **Outlines Toggle** | Toggle character outlines on/off |
 | **Two-Colored Eyes** | Enable/disable heterochromia effect |
-| **Tacet Mark Animation** | Animate Tacet Mark with driver expressions |
-| **Solid Mode** | Toggle solid viewport display mode |
+| **Animate Tacet Mark** | Toggle Tacet Mark animation with custom driver expression |
 
-### 🎥 Smart Camera
+### 🎥 Smart Camera System
 | Feature | Description |
 |---|---|
-| **Smart Camera** | Auto-positioned camera with preset sizes (M, MS, S, XL, XXL) |
+| **Smart Camera** | Auto-positioned camera with portrait presets (M, MS, S, XL, XXL) |
 
-### 🔧 AMD Fix
+### 🔧 AMD Material Fix
 | Feature | Description |
 |---|---|
-| **AMD Material Fix** | Fix texture interpolation issues on AMD GPUs (Linear / Cubic) |
+| **Linear / Cubic** | Fix texture interpolation issues on AMD GPUs |
 
 ---
 
@@ -114,3 +117,5 @@ GPL-3.0 — See [LICENSE](LICENSE) for details.
 ## 👤 Credits
 
 **Akatsuki** — Version 1.0
+
+Special thanks to **Jonn**, **Scheinze**, and **Micchi** from the **Omatsuri** Discord server.
