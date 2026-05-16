@@ -22,7 +22,7 @@ A Blender addon for setting up Wuthering Waves characters from start to finish. 
 
 ## 🔗 Requirements
 
-- [**UEFormat**](https://github.com/half-sword/ueformat) — Required for importing `.uemodel` files into Blender
+- [**UEFormat**](https://github.com/h4lfheart/UEFormat/tree/blender) — Required for importing `.uemodel` files into Blender
 
 ---
 
@@ -118,4 +118,6 @@ GPL-3.0 — See [LICENSE](LICENSE) for details.
 
 **Akatsuki** — Version 1.0
 
-Special thanks to **Jonn**, **Scheinze**, and **Micchi** from the **Omatsuri** Discord server.
+This project was developed with the help of many public guides, documentation, and examples from the community. Sincere thanks to the original authors for sharing their knowledge.
+
+Special thanks to **Jonn**, **Scheinze**, **Micchi**, and **Fnoji** from the **Omatsuri** Discord server.
