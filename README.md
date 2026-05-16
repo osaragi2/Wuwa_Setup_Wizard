@@ -120,4 +120,4 @@ GPL-3.0 — See [LICENSE](LICENSE) for details.
 
 This project was developed with the help of many public guides, documentation, and examples from the community. Sincere thanks to the original authors for sharing their knowledge.
 
-Special thanks to **Jonn**, **Scheinze**, **Micchi**, and **Fnoji** from the **Omatsuri** Discord server.
+Special thanks to **Jonn**, **Scheinze**, **Micchi**, **Fnoji**, and **Maxmilk** from the **Omatsuri** Discord server.
