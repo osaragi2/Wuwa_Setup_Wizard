@@ -1,0 +1,19 @@
+schema_version = "1.0.0"
+
+id = "wuwa_setup_wizard"
+version = "1.0.0"
+name = "Wuthering Waves Setup Wizard"
+tagline = "Comprehensive toolkit for Wuthering Waves character setup in Blender"
+maintainer = "Akatsuki"
+type = "add-on"
+
+blender_version_min = "4.2.0"
+
+license = ["SPDX:GPL-3.0-or-later"]
+
+[permissions]
+files = "Import/export model files and textures"
+network = "None required"
+
+# Optional: Dependencies can be added here if needed
+# [wheels]
