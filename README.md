@@ -121,3 +121,5 @@ GPL-3.0 — See [LICENSE](LICENSE) for details.
 This project was developed with the help of many public guides, documentation, and examples from the community. Sincere thanks to the original authors for sharing their knowledge.
 
 Special thanks to **Jonn**, **Scheinze**, **Micchi**, **Fnoji**, and **Maxmilk** from the **Omatsuri** Discord server.
+
+If you have any questions or want to get in touch, feel free to join the **Omatsuri** Discord server: [discord.gg/omatsuri](https://discord.gg/omatsuri-894925535870865498)
