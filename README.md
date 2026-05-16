@@ -1,0 +1,116 @@
+# ✨ Wuwa Character Setup
+
+A Blender addon for setting up Wuthering Waves characters from start to finish. With a single Quick Setup click, the addon automatically applies shaders, assigns textures, creates outlines, and configures geometry nodes — turning raw model files into fully rigged characters ready for animation in just minutes.
+
+![Blender](https://img.shields.io/badge/Blender-4.2+-orange?logo=blender&logoColor=white)
+![License](https://img.shields.io/badge/License-GPL--3.0-blue)
+![Version](https://img.shields.io/badge/Version-1.0.0-green)
+
+---
+
+## 📦 Installation
+
+1. Download the addon `.zip` file
+2. Open Blender → `Edit` → `Preferences` → `Add-ons`
+3. Click `Install from Disk...` → select the `.zip` file
+4. Enable **Wuthering Waves Setup Wizard**
+
+> [!NOTE]
+> Requires **Blender 4.2** or later.
+
+---
+
+## 🔗 Requirements
+
+- [**UEFormat**](https://github.com/half-sword/ueformat) — Required for importing `.uemodel` files into Blender
+
+---
+
+## 🚀 Quick Start
+
+### Step 1 — Import Model
+Install the **UEFormat** addon, then use `File` → `Import` → `Unreal Engine (.uemodel)` to import your character model.
+
+### Step 2 — Quick Setup
+Select the character mesh → open the **Wuthering Waves** panel in the sidebar (`N`) → click **Quick Setup**.
+
+The addon will automatically:
+- 🎨 Apply Shader & Material
+- 🖼️ Assign Textures
+- 📐 Set up Geometry Nodes & Outlines
+
+### Step 3 — Customize (Optional)
+Use the panel sections below to further enhance your character setup.
+
+---
+
+## 🎯 Features
+
+### 🎨 Shader & Material
+| Feature | Description |
+|---|---|
+| **Shader Selection** | Choose between Wuthering Waves or Gathering Wives shader |
+| **Apply Shader** | One-click shader and material assignment |
+| **Import Textures** | Automatic texture detection and assignment |
+| **Global Settings** | Adjust shadow, skin color, face expression settings across all materials |
+
+### 🖼️ Texture Pipeline
+| Feature | Description |
+|---|---|
+| **Texture Pipeline** | Cycle between Standard, Mod, Merged texture modes |
+| **Texture Form Change** | Switch texture variants on the fly |
+
+### 🦴 Rigging & Drivers
+| Feature | Description |
+|---|---|
+| **Rigify Armature** | One-click professional rig generation with Rigify |
+| **Create Face Panel** | Build facial expression controls with bone drivers |
+| **Import Face Panel** | Import pre-made face panel from `.blend` file |
+| **EyeTracker** | Automatic eye tracking system with pupil controls |
+| **Set Driver** | Set up shader drivers for light direction and head tracking |
+
+### 🔧 Advanced Tools
+| Feature | Description |
+|---|---|
+| **Animation Mode** | Toggle lightweight viewport mode for smoother animation playback |
+| **Add Tacet Mark** | Add and configure Tacet Mark with UV and animation |
+| **Join Mesh** | Merge character mesh parts into one object |
+| **Create Collection** | Organize objects into structured collections |
+| **Set Up Geometry Nodes** | Configure outlines and geometry node effects |
+| **Bone Arrangement** | Organize physical bones (Hair, Skirt, Cloth, Chest, Tail) into collections |
+| **Planet Shadow Catcher** | Set up shadow catcher for Planet material |
+| **Seethrough Mesh** | Configure mesh transparency for seethrough parts |
+
+### ✨ Visual Effects
+| Feature | Description |
+|---|---|
+| **Outlines Toggle** | Toggle character outlines on/off |
+| **Two-Colored Eyes** | Enable/disable heterochromia effect |
+| **Tacet Mark Animation** | Animate Tacet Mark with driver expressions |
+| **Solid Mode** | Toggle solid viewport display mode |
+
+### 🎥 Smart Camera
+| Feature | Description |
+|---|---|
+| **Smart Camera** | Auto-positioned camera with preset sizes (M, MS, S, XL, XXL) |
+
+### 🔧 AMD Fix
+| Feature | Description |
+|---|---|
+| **AMD Material Fix** | Fix texture interpolation issues on AMD GPUs (Linear / Cubic) |
+
+---
+
+## 📍 Panel Location
+
+Blender Sidebar (`N`) → Tab **Wuthering Waves**
+
+---
+
+## 📄 License
+
+GPL-3.0 — See [LICENSE](LICENSE) for details.
+
+## 👤 Credits
+
+**Akatsuki** — Version 1.0
