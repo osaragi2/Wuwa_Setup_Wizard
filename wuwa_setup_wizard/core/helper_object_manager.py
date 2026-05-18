@@ -86,9 +86,9 @@ class HelperObjectManager:
         constraint = obj.constraints.new(type='CHILD_OF')
         constraint.target = armature
         constraint.subtarget = head_bone
-        constraint.use_rotation_x = False
-        constraint.use_rotation_y = False
-        constraint.use_rotation_z = False
+        constraint.use_rotation_x = True
+        constraint.use_rotation_y = True
+        constraint.use_rotation_z = True
 
         with bpy.context.temp_override(object=obj, constraint=constraint):
             bpy.ops.constraint.childof_set_inverse(constraint=constraint.name)

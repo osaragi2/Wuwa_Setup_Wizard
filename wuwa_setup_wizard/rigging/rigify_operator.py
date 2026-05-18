@@ -199,12 +199,28 @@ class WW_OT_Rigify(bpy.types.Operator):
     def modify_bone_rig_type(self, armature, bones_and_rig_types):
         for bone_name, rig_type, widget_type in bones_and_rig_types:
             bone = armature.pose.bones.get(bone_name)
-            if bone:
-                armature.data.bones[bone_name].select = True
-                armature.data.bones.active = armature.data.bones[bone_name]
+            if not bone:
+                continue
+            armature.data.bones[bone_name].select = True
+            armature.data.bones.active = armature.data.bones[bone_name]
+            if not hasattr(bone, 'rigify_type'):
+                try:
+                    import addon_utils, sys, io
+                    old_out, old_err = sys.stdout, sys.stderr
+                    sys.stdout, sys.stderr = io.StringIO(), io.StringIO()
+                    try:
+                        addon_utils.disable("rigify", default_set=False)
+                        addon_utils.enable("rigify", default_set=True)
+                    finally:
+                        sys.stdout, sys.stderr = old_out, old_err
+                except Exception:
+                    pass
+            if hasattr(bone, 'rigify_type'):
                 bone.rigify_type = rig_type
-                if widget_type and bone.rigify_parameters:
+                if widget_type and hasattr(bone, 'rigify_parameters') and bone.rigify_parameters:
                     bone.rigify_parameters.super_copy_widget_type = widget_type
+            else:
+                print(f"[WuWa] WARNING: rigify_type not found on bone '{bone_name}' — skipping")
 
     # Creates heel bone from foot bone for IK setup
     def duplicate_and_adjust_heel_bone(self, armature, foot_bone_name, toe_bone_name,
@@ -308,6 +324,25 @@ class WW_OT_Rigify(bpy.types.Operator):
                 addon_utils.enable("rigify", default_set=True)
             finally:
                 sys.stdout, sys.stderr = old_stdout, old_stderr
+
+            try:
+                test_bone = next(
+                    (b for arm in bpy.data.armatures
+                     for b in bpy.data.objects
+                     if b.type == 'ARMATURE' and b.data == arm
+                     for b in b.pose.bones),
+                    None
+                )
+                if test_bone is not None and not hasattr(test_bone, 'rigify_type'):
+                    old_stdout2, old_stderr2 = sys.stdout, sys.stderr
+                    sys.stdout, sys.stderr = io.StringIO(), io.StringIO()
+                    try:
+                        addon_utils.disable("rigify", default_set=False)
+                        addon_utils.enable("rigify", default_set=True)
+                    finally:
+                        sys.stdout, sys.stderr = old_stdout2, old_stderr2
+            except Exception:
+                pass
 
             ObjectManager.clear_cache()
             ObjectManager.refresh_context()
