@@ -83,6 +83,36 @@ def _update_skin_color(self, context):
     GlobalSettingsManager.set_skin_edge_color(mesh, ww_props.gs_skin_edge_color)
 
 
+# Applies GW Shadow settings (Shadow Position, Softness, Cast Shadows) when modified
+def _update_gw_shadow(self, context):
+    from ..core.global_settings_manager import GlobalSettingsManager
+    from ..material.material_manager import MaterialManager
+
+    mesh = context.active_object
+    if not mesh or mesh.type != 'MESH' or not MaterialManager.has_ww_materials(mesh):
+        return
+
+    ww_props = context.scene.ww_properties
+    GlobalSettingsManager.set_gw_shadow_position(mesh, ww_props.gs_gw_shadow_position)
+    GlobalSettingsManager.set_gw_shadow_softness(mesh, ww_props.gs_gw_shadow_softness)
+    GlobalSettingsManager.set_gw_cast_shadow(mesh, ww_props.gs_gw_cast_shadow)
+
+
+# Applies GW Skin Color settings (Base Color, Shadow Color, Skin Color Multiplier) when modified
+def _update_gw_skin(self, context):
+    from ..core.global_settings_manager import GlobalSettingsManager
+    from ..material.material_manager import MaterialManager
+
+    mesh = context.active_object
+    if not mesh or mesh.type != 'MESH' or not MaterialManager.has_ww_materials(mesh):
+        return
+
+    ww_props = context.scene.ww_properties
+    GlobalSettingsManager.set_gw_base_color(mesh, ww_props.gs_gw_base_color)
+    GlobalSettingsManager.set_gw_shadow_color(mesh, ww_props.gs_gw_shadow_color)
+    GlobalSettingsManager.set_gw_skin_color_multiplier(mesh, ww_props.gs_gw_skin_color_multiplier)
+
+
 # ========== PROPERTIES ==========
 
 # Main addon property group
@@ -96,7 +126,7 @@ class WW_Properties(PropertyGroup):
             ('gathering_wives', "Gathering Wives",
              "New shader with Head Controller and Main Light")
         ],
-        default='wuthering_waves',
+        default='gathering_wives',
         update=update_shader_type
     )
     face_panel_file_path: StringProperty(
@@ -222,4 +252,56 @@ class WW_Properties(PropertyGroup):
         min=0.0, max=1.0,
         default=(1.0, 0.6, 0.6, 1.0),
         update=_update_skin_color
+    )
+
+    # ========== GW GLOBAL SETTINGS PROPERTIES ==========
+
+    # GW Shadow settings (applied to all Gathering Wives materials)
+    gs_gw_shadow_position: FloatProperty(
+        name="Shadow Position",
+        description="[GW] Controls the shadow boundary position across all Gathering Wives materials",
+        min=0.0, max=1.0, default=0.5,
+        update=_update_gw_shadow
+    )
+    gs_gw_shadow_softness: FloatProperty(
+        name="Shadow Softness",
+        description="[GW] Controls the shadow edge softness across all Gathering Wives materials",
+        min=0.0, max=1.0, default=0.075,
+        update=_update_gw_shadow
+    )
+    gs_gw_cast_shadow: FloatProperty(
+        name="Enable Cast Shadows",
+        description="[GW] Enables or disables cast shadows on Gathering Wives materials",
+        min=0.0, max=1.0, default=0.0,
+        update=_update_gw_shadow
+    )
+
+    # GW Skin Color settings (applied to all Gathering Wives materials)
+    # Defaults converted from HSV to linear RGB:
+    #   Base Color:           HSV(0, 0, 1, 1)          → (1.0, 1.0, 1.0, 1.0)
+    #   Shadow Color:         HSV(0.61, 0.03, 0.5, 1)  ≈ (0.485, 0.490, 0.5, 1.0)
+    #   Skin Color Multiplier:HSV(0, 0, 1, 1)           → (1.0, 1.0, 1.0, 1.0)
+    gs_gw_base_color: FloatVectorProperty(
+        name="Base Color",
+        description="[GW] Sets the base skin color on all Gathering Wives materials",
+        subtype='COLOR', size=4,
+        min=0.0, max=1.0,
+        default=(1.0, 1.0, 1.0, 1.0),
+        update=_update_gw_skin
+    )
+    gs_gw_shadow_color: FloatVectorProperty(
+        name="Shadow Color",
+        description="[GW] Sets the shadow color on all Gathering Wives materials",
+        subtype='COLOR', size=4,
+        min=0.0, max=1.0,
+        default=(0.485, 0.490, 0.5, 1.0),
+        update=_update_gw_skin
+    )
+    gs_gw_skin_color_multiplier: FloatVectorProperty(
+        name="Skin Color Multiplier",
+        description="[GW] Sets the skin color multiplier on all Gathering Wives materials",
+        subtype='COLOR', size=4,
+        min=0.0, max=1.0,
+        default=(1.0, 1.0, 1.0, 1.0),
+        update=_update_gw_skin
     )

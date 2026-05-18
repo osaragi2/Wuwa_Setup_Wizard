@@ -8,6 +8,7 @@ from bpy_extras.io_utils import ImportHelper
 from ..core.object_manager import ObjectManager
 from ..core.shape_key_manager import ShapeKeyManager
 from ..core.utils import Utils
+from .eye_tracker_utils import EyeTrackerUtils
 
 
 # Returns addon preferences for persistent storage
@@ -434,6 +435,10 @@ class WW_OT_ImportFacePanel(Operator, ImportHelper):
                     ShapeKeyManager.clear_shape_key_drivers(
                         mesh, ShapeKeyManager.protected_shape_keys)
                     self.setup_drivers(context, mesh, panel_armature)
+                    # Rebuild Pupil drivers if rig armature has EyeTracker (post-Rigify)
+                    rig_armature = ObjectManager.get_armature(mesh)
+                    if rig_armature and "EyeTracker" in rig_armature.pose.bones:
+                        EyeTrackerUtils.setup_pupil_drivers(rig_armature, mesh)
 
                     msg = (f"Face Panel drivers reset for '{cleaned_name}'")
                     self.report({'INFO'}, msg)
@@ -502,6 +507,10 @@ class WW_OT_ImportFacePanel(Operator, ImportHelper):
             ShapeKeyManager.clear_shape_key_drivers(
                 mesh, ShapeKeyManager.protected_shape_keys)
             self.setup_drivers(context, mesh, panel_armature)
+            # Rebuild Pupil drivers if rig armature has EyeTracker (post-Rigify)
+            rig_armature = ObjectManager.get_armature(mesh)
+            if rig_armature and "EyeTracker" in rig_armature.pose.bones:
+                EyeTrackerUtils.setup_pupil_drivers(rig_armature, mesh)
 
             mesh["face_panel_assigned"] = True
 

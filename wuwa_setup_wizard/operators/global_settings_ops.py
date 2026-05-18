@@ -42,6 +42,16 @@ class WW_OT_ApplyGlobalSettings(Operator):
             GlobalSettingsManager.set_skin_shadow_color(mesh, ww_props.gs_skin_shadow_color)
             GlobalSettingsManager.set_skin_edge_color(mesh, ww_props.gs_skin_edge_color)
 
+            # GW Shadow
+            GlobalSettingsManager.set_gw_shadow_position(mesh, ww_props.gs_gw_shadow_position)
+            GlobalSettingsManager.set_gw_shadow_softness(mesh, ww_props.gs_gw_shadow_softness)
+            GlobalSettingsManager.set_gw_cast_shadow(mesh, ww_props.gs_gw_cast_shadow)
+
+            # GW Skin Color
+            GlobalSettingsManager.set_gw_base_color(mesh, ww_props.gs_gw_base_color)
+            GlobalSettingsManager.set_gw_shadow_color(mesh, ww_props.gs_gw_shadow_color)
+            GlobalSettingsManager.set_gw_skin_color_multiplier(mesh, ww_props.gs_gw_skin_color_multiplier)
+
             self.report({'INFO'}, "Global Settings applied")
             return {'FINISHED'}
         except Exception as e:
@@ -84,6 +94,16 @@ class WW_OT_ResetGlobalSettings(Operator):
             ww_props.gs_skin_midtone_color = (0.8, 0.48, 0.48, 1.0)
             ww_props.gs_skin_shadow_color = (0.4, 0.24, 0.24, 1.0)
             ww_props.gs_skin_edge_color = (1.0, 0.6, 0.6, 1.0)
+
+            # GW Shadow defaults
+            ww_props.gs_gw_shadow_position = 0.5
+            ww_props.gs_gw_shadow_softness = 0.075
+            ww_props.gs_gw_cast_shadow = 0.0
+
+            # GW Skin Color defaults
+            ww_props.gs_gw_base_color = (1.0, 1.0, 1.0, 1.0)
+            ww_props.gs_gw_shadow_color = (0.485, 0.490, 0.5, 1.0)
+            ww_props.gs_gw_skin_color_multiplier = (1.0, 1.0, 1.0, 1.0)
 
             self.report({'INFO'}, "Global Settings reset to defaults")
             return {'FINISHED'}

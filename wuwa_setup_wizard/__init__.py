@@ -40,7 +40,7 @@ from .ui.properties import WW_Properties
 bl_info = {
     "name": "Wuthering Waves Setup Wizard",
     "author": "Wuwa Community",
-    "version": (1, 0, 0),
+    "version": (1, 0, 1),
     "blender": (4, 2, 0),
     "location": "View3D > Sidebar > Wuthering Waves",
     "description": "A toolkit to import and set up shaders, materials, and rigs for Wuthering Waves characters.",
@@ -55,7 +55,7 @@ class WW_AddonPreferences(AddonPreferences):
 
     last_shader_type: StringProperty(
         name="Last Shader Type",
-        default='wuthering_waves'
+        default='gathering_wives'
     )
 
     face_panel_file_path: StringProperty(

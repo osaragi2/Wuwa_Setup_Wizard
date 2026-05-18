@@ -1,7 +1,7 @@
 import bpy
 from bpy.types import Operator
 
-from ..addon_info import get_shader_path
+from ..addon_info import get_resolved_shader_type, prop_to_shader_key
 from ..core.object_manager import ObjectManager
 from ..core.scene_manager import SceneManager
 from ..material.material_manager import MaterialManager
@@ -24,7 +24,7 @@ class WW_OT_ApplyShader(Operator):
             self.report({'ERROR'}, "Please select a mesh object first")
             return {'CANCELLED'}
 
-        filepath = get_shader_path()
+        filepath, shader_prop = get_resolved_shader_type()
 
         if not filepath:
             self.report(
@@ -39,13 +39,13 @@ class WW_OT_ApplyShader(Operator):
 
         try:
             SceneManager.setup_scene_settings(context)
-            shader_type = context.scene.ww_properties.shader_type
-            if shader_type == 'gathering_wives':
+            shader_key = prop_to_shader_key(shader_prop)
+            if shader_key == 'gw':
                 is_first = "[GW] Outlines" not in bpy.data.node_groups
             else:
                 is_first = "[WW] Outlines" not in bpy.data.node_groups
 
-            if ShaderImporter.import_shader(filepath, mesh, is_first):
+            if ShaderImporter.import_shader(filepath, mesh, is_first, shader_type=shader_key):
                 cleaned_name = ObjectManager._clean_mesh_name(mesh.name)
                 self.report({'INFO'}, f"Shader applied to '{cleaned_name}'")
                 bpy.ops.ww.import_texture('INVOKE_DEFAULT')

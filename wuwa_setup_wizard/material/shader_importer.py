@@ -333,21 +333,24 @@ class ShaderImporter:
 
     # Detects shader type from settings and delegates to the unified import pipeline
     @staticmethod
-    def import_shader(filepath: str, mesh: bpy.types.Object, is_first: bool = True) -> bool:
+    def import_shader(filepath: str, mesh: bpy.types.Object, is_first: bool = True,
+                      shader_type: str | None = None) -> bool:
         if not os.path.exists(filepath) or not filepath.endswith('.blend'):
             return False
 
         Utils.set_viewport('SOLID')
         mesh_name = mesh.name
 
-        shader_type = 'ww'
-        try:
-            if hasattr(bpy.context, 'scene') and hasattr(bpy.context.scene, 'ww_properties'):
-                prop_type = bpy.context.scene.ww_properties.shader_type
-                if prop_type == 'gathering_wives':
-                    shader_type = 'gw'
-        except (AttributeError, TypeError):
-            pass
+        # If shader_type is explicitly provided, use it directly (avoids mismatch with filepath)
+        if shader_type is None:
+            shader_type = 'ww'
+            try:
+                if hasattr(bpy.context, 'scene') and hasattr(bpy.context.scene, 'ww_properties'):
+                    prop_type = bpy.context.scene.ww_properties.shader_type
+                    if prop_type == 'gathering_wives':
+                        shader_type = 'gw'
+            except (AttributeError, TypeError):
+                pass
 
         result = ShaderImporter._import_shader(filepath, mesh, mesh_name, is_first, shader_type)
 

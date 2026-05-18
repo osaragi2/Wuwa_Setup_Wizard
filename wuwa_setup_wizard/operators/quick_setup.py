@@ -3,7 +3,7 @@ import os
 import bpy
 from bpy.types import Operator
 
-from ..addon_info import get_shader_path
+from ..addon_info import get_resolved_shader_type, prop_to_shader_key
 from ..core.collection_manager import CollectionManager
 from ..core.object_manager import ObjectManager
 from ..core.scene_manager import SceneManager
@@ -73,6 +73,7 @@ class WW_OT_QuickSetup(Operator):
     # Requires shader blend file to be configured in preferences
     @classmethod
     def poll(cls, context):
+        from ..addon_info import get_shader_path
         return bool(get_shader_path())
 
     # ========== INVOKE AND MODAL ==========
@@ -189,13 +190,14 @@ class WW_OT_QuickSetup(Operator):
                 self.report({'INFO'}, f"'{cleaned_name}' already set up, skipped")
                 return
 
-            shader_path = get_shader_path()
+            shader_path, shader_prop = get_resolved_shader_type()
             if not shader_path:
                 self.report({'ERROR'}, "Shader file not found")
                 return
 
+            shader_key = prop_to_shader_key(shader_prop) if shader_prop else 'gw'
             ProgressBar.header(f"Quick Setup: {cleaned_name}")
-            self._execute_setup_steps(context, new_mesh, shader_path, cleaned_name, wm)
+            self._execute_setup_steps(context, new_mesh, shader_path, cleaned_name, shader_key, wm)
 
         except Exception as e:
             self.report({'ERROR'}, f"Setup error: {str(e)}")
@@ -218,15 +220,14 @@ class WW_OT_QuickSetup(Operator):
     # ========== SETUP STEPS ==========
 
     # Runs all setup steps in sequence: shader, textures, scene, rigify, face panel, organize
-    def _execute_setup_steps(self, context, new_mesh, shader_path, cleaned_name, wm):
+    def _execute_setup_steps(self, context, new_mesh, shader_path, cleaned_name, shader_key, wm):
         SceneManager.setup_scene_settings(context)
-        shader_type = context.scene.ww_properties.shader_type
-        if shader_type == 'gathering_wives':
+        if shader_key == 'gw':
             is_first = "[GW] Outlines" not in bpy.data.node_groups
         else:
             is_first = "[WW] Outlines" not in bpy.data.node_groups
 
-        self._step_apply_shader(new_mesh, shader_path, is_first, wm)
+        self._step_apply_shader(new_mesh, shader_path, is_first, shader_key, wm)
         self._step_load_textures(new_mesh, wm)
         self._step_setup_scene(context, wm)
         self._step_rigify(context, new_mesh, wm)
@@ -235,10 +236,10 @@ class WW_OT_QuickSetup(Operator):
         self._step_complete(cleaned_name, wm)
 
     # Imports and applies the character shader to the mesh
-    def _step_apply_shader(self, new_mesh, shader_path, is_first, wm):
+    def _step_apply_shader(self, new_mesh, shader_path, is_first, shader_key, wm):
         ProgressBar.show(10, "Applying shader...")
         wm.progress_update(10)
-        if not ShaderImporter.import_shader(shader_path, new_mesh, is_first):
+        if not ShaderImporter.import_shader(shader_path, new_mesh, is_first, shader_type=shader_key):
             raise RuntimeError("Shader application failed")
 
     # Discovers and assigns texture files from the import directory

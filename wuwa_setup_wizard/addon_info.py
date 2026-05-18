@@ -36,25 +36,39 @@ def get_available_shaders():
     return available
 
 
-# Returns path to shader .blend file based on selected shader type
-def get_shader_path():
+# Converts scene property value to internal shader key ('ww' or 'gw')
+def prop_to_shader_key(prop_value: str) -> str:
+    return 'gw' if prop_value == 'gathering_wives' else 'ww'
+
+
+# Returns (filepath, prop_value) already synchronized — filepath always matches shader_type
+def get_resolved_shader_type():
     if not os.path.exists(_shader_folder):
-        return None
+        return None, None
 
     available = get_available_shaders()
 
-    shader_type = 'wuthering_waves'
+    # Read user preference
+    preferred = 'gathering_wives'
     try:
         if hasattr(bpy.context, 'scene') and hasattr(bpy.context.scene, 'ww_properties'):
-            shader_type = bpy.context.scene.ww_properties.shader_type
+            preferred = bpy.context.scene.ww_properties.shader_type
     except (AttributeError, TypeError):
         pass
 
-    if available.get(shader_type):
-        return os.path.join(_shader_folder, SHADER_FILES[shader_type])
+    # Use preferred if available
+    if available.get(preferred):
+        return os.path.join(_shader_folder, SHADER_FILES[preferred]), preferred
 
+    # Fallback to any available shader — return its actual type so they always match
     for key, is_available in available.items():
         if is_available:
-            return os.path.join(_shader_folder, SHADER_FILES[key])
+            return os.path.join(_shader_folder, SHADER_FILES[key]), key
 
-    return None
+    return None, None
+
+
+# Returns path to shader .blend file based on selected shader type
+def get_shader_path():
+    filepath, _ = get_resolved_shader_type()
+    return filepath

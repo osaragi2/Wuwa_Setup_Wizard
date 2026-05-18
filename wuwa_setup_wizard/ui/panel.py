@@ -453,6 +453,53 @@ class WW_PT_ShaderPanel(Panel):
                 edge_row.label(text="Edge")
                 edge_row.prop(ww_props, "gs_skin_edge_color", text="")
 
+        # GW Shadow + Skin sub-sections (Gathering Wives materials only)
+        # Get GW materials once to avoid iterating material slots 6× per draw
+        gw_mats = GlobalSettingsManager.get_gw_materials(mesh)
+        if gw_mats:
+            def _has_gw(input_name):
+                for mat in gw_mats:
+                    node = GlobalSettingsManager.get_main_node_group(mat)
+                    if node and input_name in node.inputs:
+                        return True
+                return False
+
+            has_gw_pos = _has_gw("Shadow Position")
+            has_gw_soft = _has_gw("Shadow Softness")
+            has_gw_cast = _has_gw("Enable Cast Shadows")
+
+            if has_gw_pos or has_gw_soft or has_gw_cast:
+                gw_shadow_box = gs_col.box()
+                gw_shadow_box.label(text="Shadow [GW]", icon='LIGHT_SUN')
+                gw_shadow_col = gw_shadow_box.column(align=True)
+                if has_gw_pos:
+                    gw_shadow_col.prop(ww_props, "gs_gw_shadow_position", slider=True)
+                if has_gw_soft:
+                    gw_shadow_col.prop(ww_props, "gs_gw_shadow_softness", slider=True)
+                if has_gw_cast:
+                    gw_shadow_col.prop(ww_props, "gs_gw_cast_shadow", slider=True)
+
+            has_gw_base = _has_gw("Base Color")
+            has_gw_shad = _has_gw("Shadow Color")
+            has_gw_mult = _has_gw("Skin Color Multiplier")
+
+            if has_gw_base or has_gw_shad or has_gw_mult:
+                gw_skin_box = gs_col.box()
+                gw_skin_box.label(text="Skin Color [GW]", icon='COLOR')
+                gw_skin_col = gw_skin_box.column(align=True)
+                if has_gw_base:
+                    base_row = gw_skin_col.row(align=True)
+                    base_row.label(text="Base")
+                    base_row.prop(ww_props, "gs_gw_base_color", text="")
+                if has_gw_shad:
+                    shad_row = gw_skin_col.row(align=True)
+                    shad_row.label(text="Shadow")
+                    shad_row.prop(ww_props, "gs_gw_shadow_color", text="")
+                if has_gw_mult:
+                    mult_row = gw_skin_col.row(align=True)
+                    mult_row.label(text="Multiplier")
+                    mult_row.prop(ww_props, "gs_gw_skin_color_multiplier", text="")
+
     # ========== ADVANCED TOOLS ==========
 
     # Draws the advanced tools section with driver, geometry, and utility buttons

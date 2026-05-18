@@ -187,3 +187,84 @@ class GlobalSettingsManager:
                 input_socket = node.inputs["Skin Edge Color"]
                 for i in range(min(len(value), len(input_socket.default_value))):
                     input_socket.default_value[i] = value[i]
+
+    # ========== GW SHADOW SETTINGS (Gathering Wives materials only) ==========
+
+    # Returns only materials whose shader node group name starts with "Gathering Wives"
+    @staticmethod
+    def get_gw_materials(mesh):
+        results = []
+        if not mesh or not hasattr(mesh, 'material_slots'):
+            return results
+        for slot in mesh.material_slots:
+            mat = slot.material
+            if not mat or not mat.node_tree:
+                continue
+            for node in mat.node_tree.nodes:
+                if (node.type == 'GROUP' and node.node_tree
+                        and node.node_tree.name.startswith("Gathering Wives")):
+                    results.append(mat)
+                    break
+        return results
+
+    # Sets Shadow Position on all Gathering Wives materials
+    @staticmethod
+    def set_gw_shadow_position(mesh, value):
+        for mat in GlobalSettingsManager.get_gw_materials(mesh):
+            node = GlobalSettingsManager.get_main_node_group(mat)
+            GlobalSettingsManager.set_input_value(node, "Shadow Position", value)
+
+    # Sets Shadow Softness on all Gathering Wives materials
+    @staticmethod
+    def set_gw_shadow_softness(mesh, value):
+        for mat in GlobalSettingsManager.get_gw_materials(mesh):
+            node = GlobalSettingsManager.get_main_node_group(mat)
+            GlobalSettingsManager.set_input_value(node, "Shadow Softness", value)
+
+    # Sets Enable Cast Shadows on all Gathering Wives materials
+    @staticmethod
+    def set_gw_cast_shadow(mesh, value):
+        for mat in GlobalSettingsManager.get_gw_materials(mesh):
+            node = GlobalSettingsManager.get_main_node_group(mat)
+            GlobalSettingsManager.set_input_value(node, "Enable Cast Shadows", value)
+
+    # ========== GW SKIN COLOR SETTINGS (Gathering Wives materials only) ==========
+
+    # Sets Base Color on all Gathering Wives materials
+    @staticmethod
+    def set_gw_base_color(mesh, value):
+        for mat in GlobalSettingsManager.get_gw_materials(mesh):
+            node = GlobalSettingsManager.get_main_node_group(mat)
+            if node and "Base Color" in node.inputs:
+                socket = node.inputs["Base Color"]
+                for i in range(min(len(value), len(socket.default_value))):
+                    socket.default_value[i] = value[i]
+
+    # Sets Shadow Color on all Gathering Wives materials
+    @staticmethod
+    def set_gw_shadow_color(mesh, value):
+        for mat in GlobalSettingsManager.get_gw_materials(mesh):
+            node = GlobalSettingsManager.get_main_node_group(mat)
+            if node and "Shadow Color" in node.inputs:
+                socket = node.inputs["Shadow Color"]
+                for i in range(min(len(value), len(socket.default_value))):
+                    socket.default_value[i] = value[i]
+
+    # Sets Skin Color Multiplier on all Gathering Wives materials
+    @staticmethod
+    def set_gw_skin_color_multiplier(mesh, value):
+        for mat in GlobalSettingsManager.get_gw_materials(mesh):
+            node = GlobalSettingsManager.get_main_node_group(mat)
+            if node and "Skin Color Multiplier" in node.inputs:
+                socket = node.inputs["Skin Color Multiplier"]
+                for i in range(min(len(value), len(socket.default_value))):
+                    socket.default_value[i] = value[i]
+
+    # Checks if any Gathering Wives material has the given input
+    @staticmethod
+    def has_gw_input(mesh, input_name):
+        for mat in GlobalSettingsManager.get_gw_materials(mesh):
+            node = GlobalSettingsManager.get_main_node_group(mat)
+            if node and input_name in node.inputs:
+                return True
+        return False

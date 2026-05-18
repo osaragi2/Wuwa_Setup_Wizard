@@ -1,7 +1,7 @@
 schema_version = "1.0.0"
 
 id = "wuwa_setup_wizard"
-version = "1.0.0"
+version = "1.0.1"
 name = "Wuthering Waves Setup Wizard"
 tagline = "Comprehensive toolkit for Wuthering Waves character setup in Blender"
 maintainer = "Akatsuki"
